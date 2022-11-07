@@ -10,7 +10,7 @@ If this is not a concern for you, take a look at [softfloat-wrapper](https://cra
 Just add it as a dependency in your `Cargo.toml`:
 ```toml
 [dependencies]
-softfloat = { git = "https://github.com/chipshort/softfloat" }
+softfloat-c = { git = "https://github.com/chipshort/softfloat-c" }
 ```
 
 ## Code

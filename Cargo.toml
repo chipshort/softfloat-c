@@ -1,8 +1,8 @@
 [package]
-name = "softfloat"
+name = "softfloat-c"
 version = "3.0.0"
 description = "Rust port of Berkeley SoftFloat 3E"
-repository = "https://github.com/chipshort/softfloat"
+repository = "https://github.com/chipshort/softfloat-c"
 license = "BSD-3-Clause"
 keywords = ["math", "float", "softfloat", "f32", "f64"]
 authors = ["John R. Hauser", "Christoph Otter <chipshort@protonmail.com>"]
@@ -12,3 +12,6 @@ readme = "README.md"
 [[example]]
 name = "inaccuracy"
 path = "examples/inaccuracy.rs"
+
+[dev-dependencies]
+softfloat-wrapper = "0.3.3"
