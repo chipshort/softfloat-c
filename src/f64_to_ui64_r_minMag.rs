@@ -1,0 +1,79 @@
+use crate::*;
+
+pub type __uint64_t = u64;
+pub type uint64_t = __uint64_t;
+pub type int_fast16_t = i64;
+pub type uint_fast8_t = u8;
+pub type uint_fast64_t = u64;
+
+#[derive(Copy, Clone)]
+#[repr(C)]
+pub union ui64_f64 {
+    pub ui: uint64_t,
+    pub f: float64_t,
+}
+pub type C2RustUnnamed = u32;
+pub const softfloat_flag_invalid: C2RustUnnamed = 16;
+pub const softfloat_flag_infinite: C2RustUnnamed = 8;
+pub const softfloat_flag_overflow: C2RustUnnamed = 4;
+pub const softfloat_flag_underflow: C2RustUnnamed = 2;
+pub const softfloat_flag_inexact: C2RustUnnamed = 1;
+pub unsafe fn f64_to_ui64_r_minMag(
+    mut a: float64_t,
+    mut exact: bool,
+) -> uint_fast64_t {
+    let mut current_block: u64;
+    let mut uA: ui64_f64 = ui64_f64 { ui: 0 };
+    let mut uiA: uint_fast64_t = 0;
+    let mut exp: int_fast16_t = 0;
+    let mut sig: uint_fast64_t = 0;
+    let mut shiftDist: int_fast16_t = 0;
+    let mut sign: bool = false;
+    let mut z: uint_fast64_t = 0;
+    uA.f = a;
+    uiA = uA.ui;
+    exp = (uiA >> 52 as i32) as int_fast16_t
+        & 0x7ff as i32 as i64;
+    sig = uiA & 0xfffffffffffff as u64;
+    shiftDist = 0x433 as i32 as i64 - exp;
+    if 53 as i32 as i64 <= shiftDist {
+        if exact as i32 != 0 && exp as u64 | sig != 0 {
+            softfloat_exceptionFlags = (softfloat_exceptionFlags as i32
+                | softfloat_flag_inexact as i32) as uint_fast8_t;
+        }
+        return 0 as i32 as uint_fast64_t;
+    }
+    sign = uiA >> 63 as i32 != 0;
+    if !sign {
+        if shiftDist <= 0 as i32 as i64 {
+            if shiftDist < -(11 as i32) as i64 {
+                current_block = 3337354859311854725;
+            } else {
+                z = (sig | 0x10000000000000 as u64) << -shiftDist;
+                current_block = 13242334135786603907;
+            }
+        } else {
+            sig |= 0x10000000000000 as u64;
+            z = sig >> shiftDist;
+            if exact as i32 != 0
+                && sig << (-shiftDist & 63 as i32 as i64) != 0
+            {
+                softfloat_exceptionFlags = (softfloat_exceptionFlags as i32
+                    | softfloat_flag_inexact as i32) as uint_fast8_t;
+            }
+            current_block = 13242334135786603907;
+        }
+        match current_block {
+            3337354859311854725 => {}
+            _ => return z,
+        }
+    }
+    softfloat_raiseFlags(softfloat_flag_invalid as i32 as uint_fast8_t);
+    return if exp == 0x7ff as i32 as i64 && sig != 0 {
+        0xffffffffffffffff as u64
+    } else if sign as i32 != 0 {
+        0xffffffffffffffff as u64
+    } else {
+        0xffffffffffffffff as u64
+    };
+}

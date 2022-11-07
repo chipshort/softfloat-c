@@ -1,0 +1,11 @@
+[package]
+name = "softfloat"
+version = "3.0.0"
+description = "Rust port of Berkeley SoftFloat 3E"
+repository = "https://github.com/chipshort/softfloat-port"
+license = "BSD-3-Clause"
+keywords = ["math", "float", "softfloat", "f32", "f64"]
+authors = ["John R. Hauser", "Christoph Otter <chipshort@protonmail.com>"]
+edition = "2021"
+readme = "README.md"
+# autobins = false

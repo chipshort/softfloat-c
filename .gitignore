@@ -1,0 +1,5 @@
+target
+build/*.o
+build/*.a
+build/output.txt
+build/compile_commands.json
