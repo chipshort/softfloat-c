@@ -1,6 +1,6 @@
 [submodule "berkeley-softfloat-3"]
 	path = berkeley-softfloat-3
-	url = git@github.com:ucb-bar/berkeley-softfloat-3.git
+	url = https://github.com/ucb-bar/berkeley-softfloat-3
 [submodule "c2rust"]
 	path = c2rust
 	url = https://github.com/immunant/c2rust
