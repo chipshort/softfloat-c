@@ -14,4 +14,5 @@ name = "inaccuracy"
 path = "examples/inaccuracy.rs"
 
 [dev-dependencies]
-softfloat-wrapper = "0.3.3"
+softfloat-sys = "0.1.3" # to test against
+quickcheck = "1.0.3"    # for testing many inputs
