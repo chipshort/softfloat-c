@@ -6,6 +6,8 @@ It is a direct translation using [c2rust](https://github.com/immunant/c2rust) wi
 This crate is mostly useful in contexts where you cannot link the C library directly, like in WebAssembly.
 If this is not a concern for you, take a look at [softfloat-wrapper](https://crates.io/crates/softfloat-wrapper) or [softfloat-sys](https://crates.io/crates/softfloat-sys).
 
+You should probably consider the much better tested manual port [softfloat-pure](https://github.com/HarryR/softfloat-pure)
+
 ## Usage
 Just add it as a dependency in your `Cargo.toml`:
 ```toml
